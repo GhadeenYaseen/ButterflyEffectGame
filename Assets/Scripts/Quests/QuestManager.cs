@@ -22,6 +22,13 @@ public class QuestManager : MonoBehaviour
     [Tooltip("This amount will be ADDED to current sprint speed value set up in ThirdPersonController component on player object")]
     [SerializeField] private float sprintSpeedGainAmount;
 
+    [Header("Quest2-Jump Settings")]
+    [SerializeField] private GameObject jumpIcon;
+    [Tooltip("This amount will be ADDED to current jump value set up in ThirdPersonController component on player object")]
+    [SerializeField] private float jumpHeightGainAmount;
+    [Tooltip("This amount will be SUBTRACTED to current GRAVITY value set up in ThirdPersonController component on player object")]
+    [SerializeField] private float fallSpeedGainAmount;
+
     private void Awake() 
     {
         instance = this;
@@ -64,6 +71,10 @@ public class QuestManager : MonoBehaviour
 
     private void UpdatePlayerJump()
     {
+        player.JumpHeight += jumpHeightGainAmount;
+        player.Gravity -= fallSpeedGainAmount;
+        jumpIcon.SetActive(true); 
+
         Debug.Log("increase jump power and fall speed");
     }
 
