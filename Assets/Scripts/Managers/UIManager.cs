@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float titleFadeDuration;
     [SerializeField] private TextMeshProUGUI speedTitle;
     [SerializeField] private TextMeshProUGUI jumpTitle;
-    [SerializeField] private TextMeshProUGUI graphicsTitle;
+    [SerializeField] private TextMeshProUGUI pushTitle;
 
     private void Awake() 
     {
@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     {
         speedTitle.gameObject.SetActive(false);
         jumpTitle.gameObject.SetActive(false);
-        graphicsTitle.gameObject.SetActive(false);
+        pushTitle.gameObject.SetActive(false);
     }
 
     public void UpdateTitles(QuestType quest)
@@ -36,8 +36,8 @@ public class UIManager : MonoBehaviour
                 ActivateQuestTitle(jumpTitle);
             break;
 
-            case QuestType.ChangePlayerSkin:
-                ActivateQuestTitle(graphicsTitle);
+            case QuestType.PushAbility:
+                ActivateQuestTitle(pushTitle);
             break;
             
             default:

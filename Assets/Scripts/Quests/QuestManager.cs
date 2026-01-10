@@ -4,7 +4,7 @@ public enum QuestType
 {
     SpeedGain,
     SuperJump,
-    ChangePlayerSkin,
+    PushAbility,
 }
 
 public class QuestManager : MonoBehaviour
@@ -15,6 +15,7 @@ public class QuestManager : MonoBehaviour
 
     private BasicRigidBodyPush _playerPushAbility;
 
+#region Quest settings
     [Header("Quest1-Speed Settings")]
     [SerializeField] private GameObject boltIcon;
     [Tooltip("This amount will be ADDED to current speed value set up in ThirdPersonController component on player object")]
@@ -26,8 +27,14 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private GameObject jumpIcon;
     [Tooltip("This amount will be ADDED to current jump value set up in ThirdPersonController component on player object")]
     [SerializeField] private float jumpHeightGainAmount;
-    [Tooltip("This amount will be SUBTRACTED to current GRAVITY value set up in ThirdPersonController component on player object")]
+    [Tooltip("This amount will be SUBTRACTED from current GRAVITY value set up in ThirdPersonController component on player object")]
     [SerializeField] private float fallSpeedGainAmount;
+
+    [Header("Quest3-Push Settings")]
+    [SerializeField] private GameObject pushIcon;
+    [Tooltip("This amount will be ADDED to current strength value set up in BasicRigidBodyPush component on player object")]
+    [SerializeField] private float pushStrengthAmount;
+#endregion
 
     private void Awake() 
     {
@@ -47,8 +54,8 @@ public class QuestManager : MonoBehaviour
                 UpdatePlayerJump();
             break;
 
-            case QuestType.ChangePlayerSkin:
-                UpdatePlayerGraphics();
+            case QuestType.PushAbility:
+                UpdatePlayerPushAbility();
             break;
             
             default:
@@ -78,8 +85,12 @@ public class QuestManager : MonoBehaviour
         Debug.Log("increase jump power and fall speed");
     }
 
-    private void UpdatePlayerGraphics()
+    private void UpdatePlayerPushAbility()
     {
-        Debug.Log("unlock cool meshes ontop of regular mesh :0");
+        pushIcon.SetActive(true);
+        _playerPushAbility.strength += pushStrengthAmount;
+        _playerPushAbility.canPush = true;
+
+        Debug.Log("gain ability to push stuff :0");
     }
 }
