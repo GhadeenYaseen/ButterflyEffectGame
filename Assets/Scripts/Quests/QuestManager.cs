@@ -13,9 +13,19 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField] private ThirdPersonController player;
 
+    private BasicRigidBodyPush _playerPushAbility;
+
+    [Header("Quest1-Speed Settings")]
+    [SerializeField] private GameObject boltIcon;
+    [Tooltip("This amount will be ADDED to current speed value set up in ThirdPersonController component on player object")]
+    [SerializeField] private float speedGainAmount;
+    [Tooltip("This amount will be ADDED to current sprint speed value set up in ThirdPersonController component on player object")]
+    [SerializeField] private float sprintSpeedGainAmount;
+
     private void Awake() 
     {
         instance = this;
+        _playerPushAbility = player.gameObject.GetComponent<BasicRigidBodyPush>();
     }
 
     public void GrantQuest(QuestType quest)
@@ -44,6 +54,11 @@ public class QuestManager : MonoBehaviour
 
     private void UpdatePlayerSpeed()
     {
+        boltIcon.SetActive(true);
+        player.MoveSpeed += speedGainAmount;
+        player.SprintSpeed += sprintSpeedGainAmount;
+        player.Input.sprint = true;
+        
         Debug.Log("unlock shift for speed + increase regular speed");
     }
 

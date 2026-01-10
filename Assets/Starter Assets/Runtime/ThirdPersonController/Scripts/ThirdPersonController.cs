@@ -104,6 +104,16 @@ namespace StarterAssets
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
+
+        public StarterAssetsInputs Input
+        {
+            get { return _input; }
+            set
+            {
+                _input = value;
+            }
+        }
+
         private GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
@@ -150,6 +160,8 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            SprintSpeed = MoveSpeed;
         }
 
         private void Update()
