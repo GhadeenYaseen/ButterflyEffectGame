@@ -61,7 +61,7 @@ public class ButterflyController : MonoBehaviour
         {
             int index = i;
 
-            flySequence.Append(_butterflyTransform.DOMove(destinationsList[index].position, 10f).SetEase(Ease.InOutSine)
+            flySequence.Append(_butterflyTransform.DOMove(destinationsList[index].position, 13f).SetEase(Ease.InOutSine)
                 .OnUpdate(() =>
                 {
                     Vector3 dir = destinationsList[index].position - _butterflyTransform.position;

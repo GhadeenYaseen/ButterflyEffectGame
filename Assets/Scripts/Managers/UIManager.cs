@@ -98,12 +98,14 @@ public class UIManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
+        TurnOffPlayer();
         gameOverScreen.SetActive(true);
     }
 
     public void WinScreen()
     {
         Time.timeScale = 0;
+        TurnOffPlayer();
         winScreen.SetActive(true);
     }
 
