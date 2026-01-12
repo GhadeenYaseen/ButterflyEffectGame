@@ -6,12 +6,15 @@ public class TimeOutManager : MonoBehaviour
 {
     public static TimeOutManager instance {get; private set;}
 
+    [SerializeField] private GameObject timerObject;
     [SerializeField] private TextMeshProUGUI timerText;
 
     [Tooltip("In minutes")]
     [SerializeField] private float timeBeforeLose;
 
     private float _currentTimeLeft;
+    
+    private Coroutine countdownCoroutine;
 
     private void Awake() 
     {
@@ -20,13 +23,13 @@ public class TimeOutManager : MonoBehaviour
 
     private void Start() 
     {
-        
         _currentTimeLeft = timeBeforeLose * 60f;
     }
 
     public void StartCountDown()
     {
-        StartCoroutine(BeginCountDown());
+        timerObject.SetActive(true);
+        countdownCoroutine = StartCoroutine(BeginCountDown());
     }
 
     private IEnumerator BeginCountDown()
@@ -45,6 +48,15 @@ public class TimeOutManager : MonoBehaviour
         timerText.text = "00:00";
         UIManager.instance.GameOver();
         Debug.LogError("GAME OVER FOO");
+    }
+
+    public void StopTimer()
+    {
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+            countdownCoroutine = null;
+        }
     }
      
 }

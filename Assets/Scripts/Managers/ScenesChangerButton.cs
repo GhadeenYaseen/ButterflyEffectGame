@@ -4,6 +4,6 @@ public class ScenesChangerButton : MonoBehaviour
 {
     public void ChangeScene(string sceneName) 
     {
-        ScenesMngr.ScenesMngrInstance.StartLoading(sceneName);
+        ScenesMngr.instance.StartLoading(sceneName);
     }
 }

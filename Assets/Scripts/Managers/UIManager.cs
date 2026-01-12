@@ -1,11 +1,14 @@
 using DG.Tweening;
+using StarterAssets;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance {get; private set;}
+
+    [SerializeField] private ThirdPersonController player;
+    [SerializeField] private Animator playerAnim;
 
     [Header("Quests Text")]
     [SerializeField] private float titleFadeDuration;
@@ -15,6 +18,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Screens")]
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject winScreen;
+    [SerializeField] private GameObject pauseScreen;
 
     private void Awake() 
     {
@@ -27,6 +32,25 @@ public class UIManager : MonoBehaviour
         speedTitle.gameObject.SetActive(false);
         jumpTitle.gameObject.SetActive(false);
         pushTitle.gameObject.SetActive(false);
+    }
+
+    private void Update() 
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            PauseGame();
+        }
+
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            ResumeGame();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            ScenesMngr.instance.StartLoading("Main Menu");
+        }
+        
     }
 
     public void UpdateTitles(QuestType quest)
@@ -57,9 +81,41 @@ public class UIManager : MonoBehaviour
         title.DOFade(1f, titleFadeDuration);
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        TurnOffPlayer();
+        pauseScreen.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        TurnOnPlayer();
+        pauseScreen.SetActive(false);
+    }
+    
     public void GameOver()
     {
         Time.timeScale = 0;
         gameOverScreen.SetActive(true);
+    }
+
+    public void WinScreen()
+    {
+        Time.timeScale = 0;
+        winScreen.SetActive(true);
+    }
+
+    private void TurnOffPlayer()
+    {
+        player.enabled = false;
+        playerAnim.enabled = false;
+    }
+
+    private void TurnOnPlayer()
+    {
+        player.enabled = true;
+        playerAnim.enabled = true;
     }
 }

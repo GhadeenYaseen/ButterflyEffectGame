@@ -4,20 +4,20 @@ using System.Collections;
 
 public class ScenesMngr : MonoBehaviour
 {
-    [HideInInspector] public static ScenesMngr ScenesMngrInstance {get; private set;}
+    [HideInInspector] public static ScenesMngr instance {get; private set;}
     
     [SerializeField] public GameObject LoadingScreen;
 
 
     private void Awake()
     {
-        if (ScenesMngrInstance != null && ScenesMngrInstance != this)
+        if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            ScenesMngrInstance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }

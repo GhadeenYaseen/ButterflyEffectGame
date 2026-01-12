@@ -5,6 +5,7 @@ public enum QuestType
     SpeedGain,
     SuperJump,
     PushAbility,
+    FinalStop
 }
 
 public class QuestManager : MonoBehaviour
@@ -57,6 +58,10 @@ public class QuestManager : MonoBehaviour
             case QuestType.PushAbility:
                 UpdatePlayerPushAbility();
             break;
+
+            case QuestType.FinalStop:
+                FinalDestination();
+            break;
             
             default:
                 Debug.LogError("wthelly type quest is this shih?");
@@ -92,5 +97,12 @@ public class QuestManager : MonoBehaviour
         _playerPushAbility.canPush = true;
 
         Debug.Log("gain ability to push stuff :0");
+    }
+
+    //if player collides with final trigger, stop timer, trigger win sequence
+    private void FinalDestination()
+    {
+        TimeOutManager.instance.StopTimer();
+        UIManager.instance.WinScreen();
     }
 }
