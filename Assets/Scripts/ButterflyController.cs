@@ -81,5 +81,11 @@ public class ButterflyController : MonoBehaviour
                 Debug.Log("Butterfly reached " + destinationsList[index].gameObject.name);
             });
         }
+
+        flySequence.OnComplete(() =>
+        {
+            Debug.Log("Butterfly reached final destination");
+            TimeOutManager.instance.StartCountDown();
+        });
     }
 }

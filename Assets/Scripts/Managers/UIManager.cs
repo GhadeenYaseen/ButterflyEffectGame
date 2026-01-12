@@ -1,5 +1,6 @@
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -12,8 +13,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI jumpTitle;
     [SerializeField] private TextMeshProUGUI pushTitle;
 
+    [Header("Screens")]
+    [SerializeField] private GameObject gameOverScreen;
+
     private void Awake() 
     {
+        Time.timeScale = 1;
         instance = this;
     }
 
@@ -50,5 +55,11 @@ public class UIManager : MonoBehaviour
     {
         title.gameObject.SetActive(true);
         title.DOFade(1f, titleFadeDuration);
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        gameOverScreen.SetActive(true);
     }
 }
