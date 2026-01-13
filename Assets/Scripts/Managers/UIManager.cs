@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Screens")]
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject gameOverAltScreen;
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject pauseScreen;
 
@@ -103,6 +104,13 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         TurnOffPlayer();
         gameOverScreen.SetActive(true);
+    }
+
+    public void GameOverAltEnding()
+    {
+        Time.timeScale = 0;
+        TurnOffPlayer();
+        gameOverAltScreen.SetActive(true);
     }
 
     public void WinScreen()

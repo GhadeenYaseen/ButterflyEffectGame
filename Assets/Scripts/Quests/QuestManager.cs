@@ -17,6 +17,8 @@ public class QuestManager : MonoBehaviour
 
     private BasicRigidBodyPush _playerPushAbility;
 
+    private bool _isSpeed= false, _isJump = false, _isStrong= false;
+
 #region Quest settings
     [Header("Quest1-Speed Settings")]
     [SerializeField] private GameObject boltIcon;
@@ -75,6 +77,8 @@ public class QuestManager : MonoBehaviour
 
     private void UpdatePlayerSpeed()
     {
+        _isSpeed = true;
+
         boltIcon.SetActive(true);
         player.MoveSpeed += speedGainAmount;
         player.SprintSpeed += sprintSpeedGainAmount;
@@ -85,6 +89,8 @@ public class QuestManager : MonoBehaviour
 
     private void UpdatePlayerJump()
     {
+        _isJump = true;
+
         player.JumpHeight += jumpHeightGainAmount;
         player.Gravity -= fallSpeedGainAmount;
         jumpIcon.SetActive(true); 
@@ -94,6 +100,8 @@ public class QuestManager : MonoBehaviour
 
     private void UpdatePlayerPushAbility()
     {
+        _isStrong = true;
+
         pushIcon.SetActive(true);
         _playerPushAbility.strength += pushStrengthAmount;
         _playerPushAbility.canPush = true;
@@ -105,6 +113,15 @@ public class QuestManager : MonoBehaviour
     private void FinalDestination()
     {
         TimeOutManager.instance.StopTimer();
-        UIManager.instance.WinScreen();
+        
+        if(_isSpeed && _isJump && _isStrong)
+        {
+            UIManager.instance.WinScreen();
+        }
+        else
+        {
+            UIManager.instance.GameOverAltEnding();
+        }
+        
     }
 }
