@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private ThirdPersonController player;
     [SerializeField] private Animator playerAnim;
+    [SerializeField] private AudioSource uiClickSFX;
 
     [Header("Quests Text")]
     [SerializeField] private float titleFadeDuration;
@@ -86,6 +87,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         TurnOffPlayer();
         pauseScreen.SetActive(true);
+        uiClickSFX.Play();
     }
 
     public void ResumeGame()
@@ -93,6 +95,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
         TurnOnPlayer();
         pauseScreen.SetActive(false);
+        uiClickSFX.Play();
     }
     
     public void GameOver()

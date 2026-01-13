@@ -13,6 +13,7 @@ public class QuestManager : MonoBehaviour
     public static QuestManager instance {get; private set;}
 
     [SerializeField] private ThirdPersonController player;
+    [SerializeField] private AudioSource questSFX;
 
     private BasicRigidBodyPush _playerPushAbility;
 
@@ -69,6 +70,7 @@ public class QuestManager : MonoBehaviour
         }
 
         UIManager.instance.UpdateTitles(quest);
+        questSFX.Play();
     }
 
     private void UpdatePlayerSpeed()
